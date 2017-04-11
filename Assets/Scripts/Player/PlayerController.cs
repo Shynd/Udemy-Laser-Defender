@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private float xMin;
     private float xMax;
+    private ScoreKeeper scoreKeeper;
 
     void Start()
     {
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
         var rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
         xMin = leftmost.x + padding;
         xMax = rightmost.x - padding;
+
+        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
     }
 
     void Update()
@@ -64,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
             if (health <= 0)
             {
+                scoreKeeper.Reset();
                 Destroy(gameObject);
             }
         }

@@ -6,6 +6,14 @@ public class EnemyBehaviour : MonoBehaviour
     public float laserSpeed = 10f;
     public float health = 200;
     public float shotsPerSecond = 0.5f;
+    public int scoreValue = 150;
+
+    private ScoreKeeper scoreKeeper;
+
+    void Start()
+    {
+        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+    }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -17,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             if (health <= 0)
             {
+                scoreKeeper.Score(scoreValue);
                 Destroy(gameObject);
             }
         }
