@@ -7,6 +7,8 @@ public class EnemyBehaviour : MonoBehaviour
     public float health = 200;
     public float shotsPerSecond = 0.5f;
     public int scoreValue = 150;
+    public AudioClip laserAudioClip;
+    public AudioClip deathAudioClip;
 
     private ScoreKeeper scoreKeeper;
 
@@ -25,8 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
 
             if (health <= 0)
             {
-                scoreKeeper.Score(scoreValue);
-                Destroy(gameObject);
+                Die();
             }
         }
     }
@@ -42,8 +43,16 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Fire()
     {
-        var startPosition = transform.position + new Vector3(0, -1.0f);
-        var laser = Instantiate(enemyLaserPrefab, startPosition, Quaternion.identity) as GameObject;
+        AudioSource.PlayClipAtPoint(laserAudioClip, transform.position);
+
+        var laser = Instantiate(enemyLaserPrefab, transform.position, Quaternion.identity) as GameObject;
         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -laserSpeed);
+    }
+
+    void Die()
+    {
+        AudioSource.PlayClipAtPoint(deathAudioClip, transform.position);
+        scoreKeeper.Score(scoreValue);
+        Destroy(gameObject);
     }
 }

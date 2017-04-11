@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float projectileSpeed = 15f;
     public float firingRate = 0.25f;
     public float padding = 1f;
+    public AudioClip laserAudioClip;
 
     private float xMin;
     private float xMax;
@@ -52,8 +53,9 @@ public class PlayerController : MonoBehaviour
 
     void Fire()
     {
-        var startPosition = transform.position + new Vector3(0, 1.0f);
-        var laser = Instantiate(laserPrefab, startPosition, Quaternion.identity) as GameObject;
+        AudioSource.PlayClipAtPoint(laserAudioClip, transform.position);
+
+        var laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
     }
 
