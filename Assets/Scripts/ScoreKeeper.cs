@@ -3,17 +3,22 @@ using UnityEngine.UI;
 
 public class ScoreKeeper : MonoBehaviour
 {
-    public int currentScore;
+    public static int currentScore;
+    private static Text scoreText;
 
-    public void Score(int points)
+    void Start()
     {
-        currentScore += points;
-        GetComponent<Text>().text = currentScore.ToString();
+        scoreText = GetComponent<Text>();
     }
 
-    public void Reset()
+    public static void Score(int points)
+    {
+        currentScore += points;
+        scoreText.text = currentScore.ToString();
+    }
+
+    public static void Reset()
     {
         currentScore = 0;
-        GetComponent<Text>().text = currentScore.ToString();
     }
 }

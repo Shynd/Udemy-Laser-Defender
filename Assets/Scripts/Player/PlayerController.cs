@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject laserPrefab;
-    public float health = 1000f;
+    public float health = 200f;
     public float playerSpeed = 10f;
     public float projectileSpeed = 15f;
     public float firingRate = 0.25f;
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
             if (health <= 0)
             {
-                scoreKeeper.Reset();
+                GameObject.Find("LevelManager").GetComponent<LevelManager>().LoadLevel("Win Screen");
                 Destroy(gameObject);
             }
         }

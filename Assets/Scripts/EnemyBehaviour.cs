@@ -52,7 +52,7 @@ public class EnemyBehaviour : MonoBehaviour
     void Die()
     {
         AudioSource.PlayClipAtPoint(deathAudioClip, transform.position);
-        scoreKeeper.Score(scoreValue);
+        ScoreKeeper.Score(scoreValue);
         Destroy(gameObject);
     }
 }
